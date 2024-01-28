@@ -7,6 +7,7 @@ import styles from './app.module.sass'
 import useInit from './hook/useInit'
 import { values } from 'ramda'
 import Detail from './views/sub/detail/Detail'
+import PageList from './views/sub/pageList/PageList'
 
 function App() {
   const [jobs, salaryLevelList, educationLevelList, fetchJobsByFilters] = useInit()
@@ -118,13 +119,13 @@ function App() {
           {values(jobs.data).length === 0 && <Box sx={{ width: 1200}}>無資料</Box>}
         </Stack>
         </Stack>
-        { open 
-        && <Detail 
+        { open && <Detail 
               open={open} 
               jobId={jobId} 
               updateOpenByClickCloseBtn={updateOpenByClickCloseBtn}
               companyPhoto={companyPhoto}
             />}
+        { jobs.total && <PageList total={jobs.total}/>}
     </Card>
   );
 }
