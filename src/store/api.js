@@ -17,7 +17,14 @@ const useStore = create((set, get) => ({
   },
 
   fetchJobsByFilters: (pre_page, page, company_name, education_level, salary_level) => {
-    fetch('/api/v1/jobs/?pre_page=' + pre_page + '&page=' + page + '&company_name=' + company_name + '&education_level=' + education_level + '&salary_level=' + salary_level)
+    let filters = [
+        'pre_page=' + pre_page,
+        'page=' + page,
+        'company_name=' + company_name,
+        'education_level=' + education_level,
+        'salary_level=' + salary_level
+    ]
+    fetch('/api/v1/jobs/?' + filters.join('&'))
     .then(response => response.json())
     .then(data => {
         set(

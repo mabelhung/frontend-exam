@@ -25,8 +25,6 @@ function App() {
   } 
 
   const handleClickSearch = () => {
-    console.log('salaryLevelId', salaryLevelId)
-    console.log('educationLevelId', educationLevelId)
     fetchJobsByFilters(10, 1, companyName, educationLevelId, salaryLevelId)
   } 
 
