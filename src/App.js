@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   Button, TextField, Select, FormControl, MenuItem, InputLabel, Stack, Box,
-  Card, CardActionArea, CardActions, CardContent, Typography
+  Card, CardActionArea, CardActions, CardContent, Typography, CardTitle
 } from '@mui/material'
 import styles from './app.module.sass'
 import useInit from './hook/useInit'
@@ -30,9 +30,14 @@ function App() {
 
   return (
     <Card variant="outlined" sx={{ mt: 40, ml:2, mr:2 }}>
-      <Stack direction="column" spacing={2} m={4}>
+      <Stack direction="column" spacing={2} m={4} sx={{ width: 1200 }}>
+        <Stack>
+          <Box>
+            <label className={styles.label}>適合前端工程師的好工作</label>
+          </Box>
+        </Stack>
         <Stack direction="row" spacing={2}>
-          <Box sx={{ minWidth: 120 }}>
+          <Box sx={{ width: 500 }}>
             <TextField
                 id="outlined-helperText"
                 label="公司名稱"
@@ -40,7 +45,7 @@ function App() {
                 onChange={ (e)=> setCompanyName(e.target.value) }
               />
           </Box>
-          <Box sx={{ minWidth: 120}}>
+          <Box sx={{ width: 200}}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">教育程度</InputLabel>
               <Select
@@ -56,7 +61,7 @@ function App() {
               </Select>
             </FormControl>
           </Box>
-          <Box sx={{ minWidth: 120 }}>
+          <Box sx={{ width: 200 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">薪水範圍</InputLabel>
               <Select
@@ -72,41 +77,41 @@ function App() {
               </Select>
             </FormControl>
           </Box>
-          <Box sx={{ minWidth: 120 }}>
+          <Box sx={{ width: 200 }}>
             <Button variant="contained" onClick={handleClickSearch}>條件搜尋</Button>
           </Box>
         </Stack>
-        <Stack direction="row" spacing={2} >
+        <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
           {jobs && values(jobs.data).map((job, index) => {
             const salary =salaryLevelList.find(item => item.id === job.salaryId.toString())?.label
             const education = educationLevelList.find(item => item.id === job.educationId.toString())?.label
             return (
-            <Card sx={{ minWidth: 300 }} key={index}>
-            <CardActionArea>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {job.companyName}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  前端工程師 {job.jobTitle}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  學歷 {education}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  薪水 {salary}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {job.preview}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary" variant="outlined" onClick={()=>handleClickOpen(job.id)}>
-                查看細節
-              </Button>
-            </CardActions>
-          </Card>
+            <Card sx={{ width: 375 }} key={index}>
+              <CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {job.companyName}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    前端工程師 {job.jobTitle}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    學歷 {education}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    薪水 {salary}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {job.preview}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary" variant="outlined" onClick={()=>handleClickOpen(job.id)}>
+                  查看細節
+                </Button>
+              </CardActions>
+            </Card>
           )
           })}
         </Stack>
