@@ -82,7 +82,7 @@ function App() {
           </Box>
         </Stack>
         <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
-          {jobs && values(jobs.data).map((job, index) => {
+          {jobs && values(jobs.data).length >0 && values(jobs.data).map((job, index) => {
             const salary =salaryLevelList.find(item => item.id === job.salaryId.toString())?.label
             const education = educationLevelList.find(item => item.id === job.educationId.toString())?.label
             return (
@@ -114,6 +114,7 @@ function App() {
             </Card>
           )
           })}
+          {values(jobs.data).length === 0 && <Box sx={{ width: 1200}}>無資料</Box>}
         </Stack>
         </Stack>
         { open 
