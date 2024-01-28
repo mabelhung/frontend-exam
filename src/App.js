@@ -15,6 +15,7 @@ function App() {
   const [salaryLevelId, setSalaryLevelId] = useState('')
   const [educationLevelId, setEducationLevelId] = useState('')
   const [companyName, setCompanyName] = useState('')
+  const [companyPhoto, setCompanyPhoto] = useState([])
 
   const handleClickOpen = (id) => {
     setJobId(id)
@@ -118,7 +119,12 @@ function App() {
         </Stack>
         </Stack>
         { open 
-        && <Detail open={open} jobId={jobId} updateOpenByClickCloseBtn={updateOpenByClickCloseBtn}/>}
+        && <Detail 
+              open={open} 
+              jobId={jobId} 
+              updateOpenByClickCloseBtn={updateOpenByClickCloseBtn}
+              companyPhoto={companyPhoto}
+            />}
     </Card>
   );
 }

@@ -1,6 +1,6 @@
-import { Fragment, useEffect, memo, useState } from 'react'
+import { useEffect, memo, useState } from 'react'
 import {
-    Button, Dialog, DialogActions, DialogContent, DialogContentText,DialogTitle
+    Button, Box, Dialog, DialogActions, DialogContent, DialogContentText,DialogTitle
 } from '@mui/material'
 
 import PropTypes from 'prop-types'
@@ -21,13 +21,16 @@ const Detail = (props) => {
     .then(response => response.json())
     .then(data => {
       setInfo(data)
-      console.log('data', data)
+      console.log('get Info by jobId', data)
     })
   }, [jobId])
 
+  useEffect(() => {
+    console.log('info.companyPhoto', info.companyPhoto)
+  }, [info.companyPhoto])
 
   return (
-    <Fragment>
+    <Box>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -37,7 +40,7 @@ const Detail = (props) => {
         <DialogTitle id="alert-dialog-title">
           {info.companyName}
         </DialogTitle>
-        <Carousel />
+        <Carousel companyPhoto={info.companyPhoto}/>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div dangerouslySetInnerHTML={{ __html: info.description }} />
@@ -49,7 +52,7 @@ const Detail = (props) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </Box>
   )
 }
 
