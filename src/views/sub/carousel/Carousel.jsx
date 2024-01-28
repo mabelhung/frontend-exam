@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import PropTypes from 'prop-types'
+import LazyLoad from 'react-lazyload';
 
 function Carousel(props) {
   const { companyPhoto } = props
@@ -21,9 +22,11 @@ function Carousel(props) {
       {companyPhoto && companyPhoto.map((photo, index) => {
         console.log('photo', photo)
         return (
-          <div key={index}>
-            <img src={photo} alt={`Slide ${index + 1}`} />
-          </div>
+            <LazyLoad height={200} offset={100}>
+                <div key={index}>
+                    <img src={photo} alt={`Slide ${index + 1}`} />
+                </div>
+            </LazyLoad>
         )
       })}
     </Slider>
