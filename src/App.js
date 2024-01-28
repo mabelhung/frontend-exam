@@ -14,6 +14,7 @@ function App() {
   const [jobId, setJobId] = useState(1)
   const [salaryLevelId, setSalaryLevelId] = useState('')
   const [educationLevelId, setEducationLevelId] = useState('')
+  const [companyName, setCompanyName] = useState('')
 
   const handleClickOpen = (id) => {
     setJobId(id)
@@ -26,7 +27,7 @@ function App() {
   const handleClickSearch = () => {
     console.log('salaryLevelId', salaryLevelId)
     console.log('educationLevelId', educationLevelId)
-    fetchJobsByFilters(10, 1, '', educationLevelId, salaryLevelId)
+    fetchJobsByFilters(10, 1, companyName, educationLevelId, salaryLevelId)
   } 
 
   return (
@@ -37,7 +38,8 @@ function App() {
             <TextField
                 id="outlined-helperText"
                 label="公司名稱"
-                defaultValue="請輸入公司名稱"
+                value={companyName}
+                onChange={ (e)=> setCompanyName(e.target.value) }
               />
           </Box>
           <Box sx={{ minWidth: 120}}>
