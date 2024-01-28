@@ -9,9 +9,11 @@ import { values } from 'ramda'
 import Detail from './views/sub/detail/Detail'
 
 function App() {
-  const [jobs, salaryLevelList, educationLevelList] = useInit()
+  const [jobs, salaryLevelList, educationLevelList, fetchJobsByFilters] = useInit()
   const [open, setOpen] = useState(false)
   const [jobId, setJobId] = useState(1)
+  const [salaryLevelId, setSalaryLevelId] = useState('')
+  const [educationLevelId, setEducationLevelId] = useState('')
 
   const handleClickOpen = (id) => {
     setJobId(id)
@@ -19,6 +21,12 @@ function App() {
   }
   const updateOpenByClickCloseBtn = () => {
     setOpen(false)
+  } 
+
+  const handleClickSearch = () => {
+    console.log('salaryLevelId', salaryLevelId)
+    console.log('educationLevelId', educationLevelId)
+    fetchJobsByFilters(10, 1, '', educationLevelId, salaryLevelId)
   } 
 
   return (
@@ -38,13 +46,13 @@ function App() {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                // value={age}
+                value={educationLevelId}
                 label="教育程度"
-                // onChange={handleChange}
+                onChange={ (e)=> setEducationLevelId(e.target.value) }
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {Object.values(educationLevelList).map(el => (
+                  <MenuItem key={el.id} value={el.id}>{el.label}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
@@ -54,24 +62,24 @@ function App() {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                // value={age}
+                value={salaryLevelId}
                 label="薪水範圍"
-                // onChange={handleChange}
+                onChange={ (e)=>setSalaryLevelId(e.target.value) }
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {Object.values(salaryLevelList).map(el => (
+                  <MenuItem key={el.id} value={el.id}>{el.label}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
           <Box sx={{ minWidth: 120 }}>
-            <Button variant="contained">條件搜尋</Button>
+            <Button variant="contained" onClick={handleClickSearch}>條件搜尋</Button>
           </Box>
         </Stack>
         <Stack direction="row" spacing={2} >
           {jobs && values(jobs.data).map((job, index) => {
-            const salary = values(salaryLevelList).find(item => item.id === job.salaryId.toString())?.label
-            const education = values(educationLevelList).find(item => item.id === job.educationId.toString())?.label
+            const salary =salaryLevelList.find(item => item.id === job.salaryId.toString())?.label
+            const education = educationLevelList.find(item => item.id === job.educationId.toString())?.label
             return (
             <Card sx={{ minWidth: 300 }} key={index}>
             <CardActionArea>

@@ -4,7 +4,13 @@ import { values } from 'ramda'
 
 function useInit() {
   const {
-    fetchEducationLevelList,fetchSalaryLevelList, fetchJobs, jobs, salaryLevelList, educationLevelList
+    fetchEducationLevelList,
+    fetchSalaryLevelList, 
+    fetchJobs, 
+    jobs, 
+    salaryLevelList, 
+    educationLevelList, 
+    fetchJobsByFilters
   } = useAPIStore()
 
   useEffect(() => {
@@ -22,8 +28,9 @@ function useInit() {
 
   return [
     jobs, 
-    salaryLevelList, 
-    educationLevelList,
+    values(salaryLevelList), 
+    values(educationLevelList),
+    fetchJobsByFilters,
   ]
 }
 

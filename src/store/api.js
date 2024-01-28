@@ -16,6 +16,19 @@ const useStore = create((set, get) => ({
     })
   },
 
+  fetchJobsByFilters: (pre_page, page, company_name, education_level, salary_level) => {
+    fetch('/api/v1/jobs/?pre_page=' + pre_page + '&page=' + page + '&company_name=' + company_name + '&education_level=' + education_level + '&salary_level=' + salary_level)
+    .then(response => response.json())
+    .then(data => {
+        set(
+            produce((draft) => {
+                console.log('fetchJobsByFilters', data)
+                draft.jobs = data
+            })
+        )
+    })
+  },
+
   salaryLevelList: {},
   fetchSalaryLevelList: () => {
     fetch('/api/v1/salaryLevelList')
