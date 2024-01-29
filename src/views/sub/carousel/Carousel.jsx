@@ -15,18 +15,14 @@ function Carousel(props) {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
+    m:3,
   }
 
   return (
     <Slider {...settings}>
       {companyPhoto && companyPhoto.map((photo, index) => {
-        console.log('photo', photo)
         return (
-            <LazyLoad height={200} offset={100}>
-                <div key={index}>
-                    <img src={photo} alt={`Slide ${index + 1}`} />
-                </div>
-            </LazyLoad>
+            <img src={photo} alt={`Slide ${index + 1}`} key={index}/>
         )
       })}
     </Slider>

@@ -32,22 +32,23 @@ function App() {
 
   return (
     <Card variant="outlined" sx={{ mt: 40, ml:2, mr:2 }}>
-      <Stack direction="column" spacing={2} m={4} sx={{ width: 1200 }}>
+      <Stack direction="column" spacing={2} m={4} sx={{ width: '100%' }}>
         <Stack>
           <Box>
             <label className={styles.label}>適合前端工程師的好工作</label>
           </Box>
         </Stack>
         <Stack direction="row" spacing={2}>
-          <Box sx={{ width: 500 }}>
+          <Box sx={{ width: '47.5%' }}>
             <TextField
                 id="outlined-helperText"
                 label="公司名稱"
                 value={companyName}
+                fullWidth
                 onChange={ (e)=> setCompanyName(e.target.value) }
               />
           </Box>
-          <Box sx={{ width: 200}}>
+          <Box sx={{ width: '18%'}}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">教育程度</InputLabel>
               <Select
@@ -63,7 +64,7 @@ function App() {
               </Select>
             </FormControl>
           </Box>
-          <Box sx={{ width: 200 }}>
+          <Box sx={{ width: '18%' }}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">薪水範圍</InputLabel>
               <Select
@@ -79,8 +80,8 @@ function App() {
               </Select>
             </FormControl>
           </Box>
-          <Box sx={{ width: 200 }}>
-            <Button variant="contained" onClick={handleClickSearch}>條件搜尋</Button>
+          <Box sx={{ width: '10%' }}>
+            <Button variant="contained" fullWidth sx={{p:1.8}} onClick={handleClickSearch}>條件搜尋</Button>
           </Box>
         </Stack>
         <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
@@ -88,9 +89,9 @@ function App() {
             const salary =salaryLevelList.find(item => item.id === job.salaryId.toString())?.label
             const education = educationLevelList.find(item => item.id === job.educationId.toString())?.label
             return (
-            <Card sx={{ width: 375 }} key={index}>
+            <Card sx={{ width: '31.5%' }} key={index}>
               <CardActionArea>
-                <CardContent>
+                <CardContent sx={{ p:2.5 }} >
                   <Typography gutterBottom variant="h5" component="div">
                     {job.companyName}
                   </Typography>
@@ -108,8 +109,8 @@ function App() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" variant="outlined" onClick={()=>handleClickOpen(job.id)}>
+              <CardActions sx={{ justifyContent: 'center' }}>
+                <Button color="primary" sx={{ m:1 }} variant="outlined" onClick={()=>handleClickOpen(job.id)}>
                   查看細節
                 </Button>
               </CardActions>

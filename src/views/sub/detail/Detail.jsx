@@ -1,6 +1,6 @@
 import { useEffect, memo, useState } from 'react'
 import {
-    Button, Box, Dialog, DialogActions, DialogContent, DialogContentText,DialogTitle
+    Button, Box, Dialog, DialogActions, DialogContent, DialogTitle,  Typography, Divider
 } from '@mui/material'
 
 import PropTypes from 'prop-types'
@@ -25,10 +25,6 @@ const Detail = (props) => {
     })
   }, [jobId])
 
-  useEffect(() => {
-    console.log('info.companyPhoto', info.companyPhoto)
-  }, [info.companyPhoto])
-
   return (
     <Box>
       <Dialog
@@ -38,13 +34,16 @@ const Detail = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {info.companyName}
+          詳細資訊
         </DialogTitle>
+        <Divider />
+        <Typography variant="h6" gutterBottom sx={{ p: 1, pt:2,  pl: 2.8}}>
+        {info.companyName} - {info.jobTitle}
+        </Typography>
+        <Divider />
         <Carousel companyPhoto={info.companyPhoto}/>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <div dangerouslySetInnerHTML={{ __html: info.description }} />
-          </DialogContentText>
+          <div dangerouslySetInnerHTML={{ __html: info.description }} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} autoFocus>
