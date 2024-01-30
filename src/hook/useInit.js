@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import useAPIStore from '../store/api'
 import { values } from 'ramda'
+import PER_PAGE from '../constants/config'
 
 function useInit() {
   const {
@@ -10,27 +11,22 @@ function useInit() {
     jobs, 
     salaryLevelList, 
     educationLevelList, 
-    fetchJobsByFilters
   } = useAPIStore()
 
   useEffect(() => {
     async function fetchData() {
       await fetchEducationLevelList()
       await fetchSalaryLevelList()
-      await fetchJobs()
+      await fetchJobs(PER_PAGE, 1)
     }
     fetchData()
   }, [fetchEducationLevelList, fetchJobs, fetchSalaryLevelList])
-
-  useEffect(() => {
-    console.log('jobs', jobs)
-  }, [jobs])
 
   return [
     jobs, 
     values(salaryLevelList), 
     values(educationLevelList),
-    fetchJobsByFilters,
+    fetchJobs,
   ]
 }
 

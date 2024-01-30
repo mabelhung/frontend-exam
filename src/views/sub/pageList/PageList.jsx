@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { Container, List, ListItem, Pagination, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Pagination } from '@mui/material';
 
 import PropTypes from 'prop-types'
+import styles from './pageList.module.sass'
+import PER_PAGE from '../../../constants/config'
 
 const PageList = (props) => {
-  const { total }  = props
+  const { total,  handlePageChange}  = props
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
 
-  useEffect(() => {
-    console.log('total', total)
-  }, [total])
-  const totalPages = Math.ceil(total / itemsPerPage);
+  const totalPages = Math.ceil(total / PER_PAGE)
 
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
+  const handlePageClick = (value) => {
+    const page = parseInt(value, 10)
+    setCurrentPage(page)
+    handlePageChange(page)
+  }
 
   return (
-    <Container>
+    <div className={styles.container}>
       <Pagination
         count={totalPages}
         page={currentPage}
-        onChange={handlePageChange}
+        onChange={(e)=> handlePageClick(e.target.textContent)}
         color="primary"
         size="large"
         showFirstButton
         showLastButton
         sx={{ marginTop: 2 }}
       />
-    </Container>
+    </div>
   );
 };
 
@@ -37,8 +37,10 @@ export default PageList;
 
 PageList.propTypes = {
   total: PropTypes.number,
+  handlePageChange: PropTypes.func,
 }
 
 PageList.defaultProps = {
   total: 0,
+  handlePageChange: () => {},
 }

@@ -8,9 +8,10 @@ import useInit from './hook/useInit'
 import { values } from 'ramda'
 import Detail from './views/sub/detail/Detail'
 import PageList from './views/sub/pageList/PageList'
+import PER_PAGE from './constants/config'
 
 function App() {
-  const [jobs, salaryLevelList, educationLevelList, fetchJobsByFilters] = useInit()
+  const [jobs, salaryLevelList, educationLevelList, fetchJobs] = useInit()
   const [open, setOpen] = useState(false)
   const [jobId, setJobId] = useState(1)
   const [salaryLevelId, setSalaryLevelId] = useState('')
@@ -25,8 +26,13 @@ function App() {
     setOpen(false)
   } 
 
+  const handlePageChange = (curPage) => {
+    fetchJobs(PER_PAGE, curPage, companyName, educationLevelId, salaryLevelId)
+  }
+  
+
   const handleClickSearch = () => {
-    fetchJobsByFilters(6, 1, companyName, educationLevelId, salaryLevelId)
+    fetchJobs(PER_PAGE, 1, companyName, educationLevelId, salaryLevelId)
   } 
 
   return (
@@ -132,7 +138,11 @@ function App() {
                 jobId={jobId} 
                 updateOpenByClickCloseBtn={updateOpenByClickCloseBtn}
               />}
-          { jobs.total && <PageList total={jobs.total}/>}
+          { jobs.total 
+            && <PageList 
+              total={jobs.total}
+              handlePageChange={handlePageChange}
+              />}
       </Card>
     </div>
    

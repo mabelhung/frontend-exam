@@ -4,32 +4,20 @@ import produce from 'immer'
 
 const useStore = create((set, get) => ({
   jobs: {},
-  fetchJobs: () => {
-    fetch('/api/v1/jobs')
-    .then(response => response.json())
-    .then(data => {
-        set(
-            produce((draft) => {
-                draft.jobs = data
-            })
-        )
-    })
-  },
-
-  fetchJobsByFilters: (pre_page, page, company_name, education_level, salary_level) => {
+  fetchJobs: (pre_page, page, company_name, education_level, salary_level) => {
     let filters = [
         'pre_page=' + pre_page,
-        'page=' + page,
-        'company_name=' + company_name,
-        'education_level=' + education_level,
-        'salary_level=' + salary_level
+        'page=' + page
     ]
+    if (company_name) filters.push('company_name=' + company_name)
+    if (education_level) filters.push('education_level=' + education_level)
+    if (salary_level) filters.push('salary_level=' + salary_level)
     fetch('/api/v1/jobs/?' + filters.join('&'))
     .then(response => response.json())
     .then(data => {
         set(
             produce((draft) => {
-                console.log('fetchJobsByFilters', data)
+                console.log('fetchJobs', data)
                 draft.jobs = data
             })
         )
