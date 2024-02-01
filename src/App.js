@@ -141,13 +141,13 @@ function App() {
                   updateOpenByClickCloseBtn={updateOpenByClickCloseBtn}
                 />}
             { jobs.total 
-              && <PageList 
-                total={jobs.total}
-                handlePageChange={handlePageChange}
-                />}
+              && <div className={styles.pageListContainer}>
+                  <PageList total={jobs.total} handlePageChange={handlePageChange} />
+                </div>}
         </Card>
       </div>
       <div className={styles.man} alt='man'/>
+      <div className={styles.hello} alt='hello'/>
     </div>
    
   );
