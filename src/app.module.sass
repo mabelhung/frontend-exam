@@ -1,3 +1,5 @@
+@use 'src/theme/variables.module.sass' as vrbs
+
 .label
     font-size: 1.5rem
     font-weight: bold
@@ -7,10 +9,25 @@
     background-size: cover
     background-position: center
     height: 100%
+    width: 100%
     margin: 0
     position: absolute
     top:0
     left:0
+
+.cardContainer
+    position: relative
+    z-index: 5
+
+.man
+    background-image: url('/views/images/Character-01.png')
+    background-repeat: no-repeat
+    position: absolute
+    top:0
+    left:0
+    height: 100%
     width: 100%
+    margin: 0
+    z-index: 1
     
     
