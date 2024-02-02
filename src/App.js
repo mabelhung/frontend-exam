@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-  Button, TextField, Select, FormControl, MenuItem, InputLabel, Stack, Box,
+  TextField, Select, FormControl, MenuItem, InputLabel, Stack, Box,
   Card, CardActionArea, CardActions, CardContent, Typography
 } from '@mui/material'
 import styles from './app.module.sass'
@@ -9,7 +9,6 @@ import { values } from 'ramda'
 import Detail from './views/sub/detail/Detail'
 import PageList from './views/sub/pageList/PageList'
 import PER_PAGE from './constants/config'
-import theme from './theme/variables.module.sass'
 
 function App() {
   const [jobs, salaryLevelList, educationLevelList, fetchJobs] = useInit()
@@ -89,7 +88,7 @@ function App() {
                 </FormControl>
               </Box>
               <Box sx={{ width: '10%' }}>
-                <Button variant="contained" fullWidth sx={{p:1.8}} onClick={handleClickSearch}>條件搜尋</Button>
+                <button type='button' onClick={handleClickSearch} className={styles.searchBtn}>條件搜尋</button>
               </Box>
             </Stack>
             <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
@@ -99,7 +98,7 @@ function App() {
                 return (
                 <Card sx={{ width: '31.5%' }} key={index}>
                   <CardActionArea>
-                    <CardContent sx={{ p:2.5 }} >
+                    <CardContent sx={{ p:2 }} >
                       <Typography gutterBottom variant="h5" component="div">
                         {job.companyName}
                       </Typography>
@@ -118,9 +117,7 @@ function App() {
                     </CardContent>
                   </CardActionArea>
                   <CardActions sx={{ justifyContent: 'center' }}>
-                    <Button color="primary" sx={{ m:1 }} variant="outlined" onClick={()=>handleClickOpen(job.id)}>
-                      查看細節
-                    </Button>
+                    <button type='button' onClick={()=>handleClickOpen(job.id)} className={styles.detailBtn}>查看細節</button>
                   </CardActions>
                 </Card>
               )
@@ -142,7 +139,7 @@ function App() {
                 />}
             { jobs.total 
               && <div className={styles.pageListContainer}>
-                  <PageList total={jobs.total} handlePageChange={handlePageChange} />
+                  <PageList total={jobs.total} handlePageChange={handlePageChange} sx={{color: '#cccccc' }} />
                 </div>}
         </Card>
       </div>
