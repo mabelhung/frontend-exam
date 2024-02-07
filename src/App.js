@@ -38,7 +38,7 @@ function App() {
   return (
     <div className={styles.background}>
       <div className={styles.cardContainer}>
-        <Card variant="outlined" sx={{ zIndex: 5, mt: '700px', mb: 1, width: '1440px', marginLeft:'auto', marginRight:'auto', }}>
+        <Card variant="outlined" sx={{ zIndex: 5, mt: '700px', mb: 1, width: { xs: '100%', sm: '100%', md: '1440px' }, marginLeft:'auto', marginRight:'auto', }}>
           <Stack direction="column" spacing={2} m={4} sx={{ width: '100%' }}>
             <Stack>
               <Box>
@@ -91,12 +91,12 @@ function App() {
                 <button type='button' onClick={handleClickSearch} className={styles.searchBtn}>條件搜尋</button>
               </Box>
             </Stack>
-            <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
+            <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap" >
               {jobs && values(jobs.data).length >0 && values(jobs.data).map((job, index) => {
                 const salary =salaryLevelList.find(item => item.id === job.salaryId.toString())?.label
                 const education = educationLevelList.find(item => item.id === job.educationId.toString())?.label
                 return (
-                <Card sx={{ width: '31.5%' }} key={index}>
+                <Card sx={{ width: { xs: '85%', sm: '50%', md: '31.1%' } }} key={index}>
                   <CardActionArea>
                     <CardContent sx={{ p:2 }} >
                       <Typography gutterBottom variant="h5" component="div">
@@ -143,8 +143,11 @@ function App() {
                 </div>}
         </Card>
       </div>
+      <div className={styles.man_bg} alt='man_bg'/>
+      {/* <div className={styles.leftEye} alt='leftEye'/> */}
+      {/* <div className={styles.rightEye} alt='rightEye'/> */}
       <div className={styles.man} alt='man'/>
-      <div className={styles.hello} alt='hello'/>
+      {/* <div className={styles.hello} alt='hello'/> */}
     </div>
    
   );
